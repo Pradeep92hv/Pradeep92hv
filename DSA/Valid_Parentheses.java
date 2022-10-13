@@ -1,25 +1,29 @@
-https://www.codingninjas.com/codestudio/problems/insert-an-element-at-its-bottom-in-a-given-stack_1171166?leftPanelTab=0
+https://www.codingninjas.com/codestudio/problems/valid-parenthesis_795104
 
 
-import java.util.* ;
-import java.io.*; 
-public class Solution 
-{
-    static void fun(Stack<Integer> s, int x)
+import java.util.Stack;
+
+public class Solution {
+    public static boolean isValidParenthesis(String x) {
+         Stack<Character> s=new Stack<>();
+    
+    for(int i=0;i<x.length();i++)
     {
-        int a=s.pop();
-        if(!s.isEmpty())
-        {
-            fun(s,x);
-        }
-        if(s.isEmpty())
-            s.push(x);
-        s.push(a);
+        char a=x.charAt(i);
+        
+       if(s.isEmpty())
+       s.push(a);
+       else if(s.peek()=='(' && a==')' || s.peek()=='[' && a==']' ||s.peek()=='{' && a=='}' )
+          s.pop();
+          else
+          s.push(a);
     }
-  public static Stack<Integer> pushAtBottom(Stack <Integer> s, int x) 
-  {
-    // Write your code here
-      fun(s,x);
-          return s;
-  }
-}
+    if(s.isEmpty())
+    return true;
+    else
+    return false;
+     
+    
+    }
+   
+    }
