@@ -26,3 +26,60 @@ class Solution
         return solve(arr,n-1,dp);
     }
 }
+
+
+
+
+
+
+
+
+
+
+tabulazation
+
+static int solveUtil(int n, int[] arr, int[] dp){
+    
+    dp[0]= arr[0];
+    
+    for(int i=1 ;i<n; i++){
+        int pick = arr[i];
+        if(i>1)
+            pick += dp[i-2];
+        int nonPick = 0+ dp[i-1];
+        
+        dp[i]= Math.max(pick, nonPick);
+    }
+    
+    
+    return dp[n-1];
+}
+
+static int solve(int n, int[] arr){
+    int dp[]=new int[n];
+    Arrays.fill(dp,-1);
+    return solveUtil(n, arr, dp);
+}
+
+
+
+space optimized
+
+static int solve(int n, int[] arr){
+    
+   int prev = arr[0];
+    int prev2 =0;
+    
+    for(int i=1; i<n; i++){
+        int pick = arr[i];
+        if(i>1)
+            pick += prev2;
+        int nonPick = 0 + prev;
+        
+        int cur_i = Math.max(pick, nonPick);
+        prev2 = prev;
+        prev= cur_i;
+        
+    }
+    return prev;
+}
