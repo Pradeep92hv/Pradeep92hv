@@ -40,3 +40,33 @@ class Solution {
           return true;
     }
 }
+
+
+
+
+
+
+class Solution {
+    public boolean canPair(int[] nums, int k) {
+        // Code here
+        
+        if(nums.length%2!=0)
+         return false;
+        int a[]=new int[k];
+        
+        for(int x:nums)
+        {
+            a[x%k]++;
+        }
+        
+        for(int i=0;i<k;i++)
+        {
+            if(a[0]%2==1)
+            return false;
+          if(i>0)
+          {
+           if(a[i]!=a[k-i])
+            return false;   
+          }
+           
+        }
