@@ -2,6 +2,68 @@
 
 https://practice.geeksforgeeks.org/problems/smallest-window-in-a-string-containing-all-the-characters-of-another-string-1587115621/0
 
+class Solution
+{
+   public static String smallestWindow(String s1, String s2)
+   {
+       String ans="";
+       
+       HashMap<Character,Integer> map2=new HashMap<>();
+       for(int i=0;i<s2.length();i++){
+           char ch=s2.charAt(i);
+           map2.put(ch,map2.getOrDefault(ch,0)+1);
+       }
+       
+       int mct=0;
+       int dmct=s2.length();
+       
+       HashMap<Character,Integer> map1=new HashMap<>();
+      
+       int i=0,j=0;
+       for(i=0;i<s1.length();i++)
+       {
+             char ch=s1.charAt(i);
+               map1.put(ch,map1.getOrDefault(ch,0)+1);
+               
+               if(map1.getOrDefault(ch,0) <= map2.getOrDefault(ch,0)){
+                   mct++;
+               }
+                while( mct==dmct)
+              {
+               String pans=s1.substring(j,i+1);
+               if(ans.length()==0 || pans.length()<ans.length())
+               {
+                   ans=pans;
+               }
+               
+          
+              ch=s1.charAt(j);
+               if(map1.get(ch)==1){
+                   map1.remove(ch);
+               }else{
+                   map1.put(ch,map1.get(ch)-1);
+               }
+               
+               if(map1.getOrDefault(ch,0) < map2.getOrDefault(ch,0)){
+                   mct--;
+               }
+                   j++;
+            //   f2=true;
+           }
+       }
+       if(ans=="") return "-1";
+       return ans;
+   }
+}
+
+
+
+
+
+
+
+
+
 
 class Solution
 {
